@@ -5,6 +5,7 @@
 
 const hostingSite = 'https://github.com/pRizz/iota-transaction-spammer-webapp'
 const hostingSiteTritified = iotaTransactionSpammer.tritifyURL(hostingSite)
+const significantFigures = 3
 
 function millisecondsToHHMMSSms(milliseconds) {
     var sec_num = parseInt(`${milliseconds / 1000}`, 10); // don't forget the second param
@@ -43,7 +44,7 @@ $(function(){
     })
 
     iotaTransactionSpammer.eventEmitter.on('averageConfirmationDurationChanged', function(averageConfirmationDuration) {
-        $('#averageConfirmationDuration')[0].innerText = averageConfirmationDuration / 1000
+        $('#averageConfirmationDuration')[0].innerText = (averageConfirmationDuration / 1000).toFixed(significantFigures)
     })
 
     iotaTransactionSpammer.eventEmitter.on('transactionCompleted', function(success) {
@@ -77,11 +78,11 @@ $(function(){
     }
 
     function updateTransactionsPerMinute() {
-        $('#transactionsPerMinuteCount')[0].innerText = iotaTransactionSpammer.getTransactionCount() / durationInMinutes()
+        $('#transactionsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getTransactionCount() / durationInMinutes()).toFixed(significantFigures)
     }
     function updateConfirmationsPerMinute() {
         const durationInMilliseconds = Date.now() - startMilliseconds
-        $('#confirmationsPerMinuteCount')[0].innerText = iotaTransactionSpammer.getConfirmationCount() / durationInMinutes()
+        $('#confirmationsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getConfirmationCount() / durationInMinutes()).toFixed(significantFigures)
     }
     function updateTimer() {
         $('#timeSpentSpamming')[0].innerText = millisecondsToHHMMSSms(durationInMilliseconds())
