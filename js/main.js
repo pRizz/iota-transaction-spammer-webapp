@@ -96,5 +96,7 @@ $(function(){
         updateTransactionsPerMinute()
         updateConfirmationsPerMinute()
     }, 1000)
+
+    $('#nodeWarning').modal('show')
 })
 
