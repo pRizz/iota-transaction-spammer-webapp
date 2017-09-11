@@ -1,0 +1,3 @@
+[submodule "deps/iota.transactionSpammer.js"]
+	path = deps/iota.transactionSpammer.js
+	url = https://github.com/pRizz/iota.transactionSpammer.js.git

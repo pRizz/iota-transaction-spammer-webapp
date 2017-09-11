@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="Peter Ryszkiewicz">
+    <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <title>Easy File Encryptor/Decryptor</title>
+
+    <script type="text/javascript" src="deps/jquery.min.js"></script>
+    <script type="text/javascript" src="deps/bootstrap.min.js"></script>
+    <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/lib/iota.min.js"></script>
+    <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/lib/curl.min.js"></script>
+    <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/lib/EventEmitter.min.js"></script>
+    <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/transactionSpammer.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+</head>
+<body style="color: #4a4a4a">
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="" onclick="window.location.reload(true)">Refresh</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/pRizz/iota-transaction-spammer-webapp">Source</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">IOTA Transaction Spammer <img class="spinning-logo" src="iotaLogo.png"></h3>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-md-4 text-center">
+            <h2 id="transactionCount">0</h2>
+            <h4>Transactions added to the tangle</h4>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2 id="confirmationCount">0</h2>
+            <h4>Confirmed transactions</h4>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2 id="averageConfirmationDuration">0</h2>
+            <h4>Average confirmation duration (seconds)</h4>
+        </div>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-md-4 text-center">
+            <h2 id="transactionsPerMinuteCount">0</h2>
+            <h4>Transactions added to the tangle per minute</h4>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2 id="confirmationsPerMinuteCount">0</h2>
+            <h4>Confirmed transactions per minute</h4>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2 id="timeSpentSpamming">0</h2>
+            <h4>Time Spent Spamming</h4>
+        </div>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-md-12">
+            <div class="panel panel-primary" style="text-align: center">
+                <div class="panel-heading text-center">
+                    <h2>Event Log</h2>
+                </div>
+                <pre class="panel-body text-left" id="eventLogContent">
+                </pre>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row marketing text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Why spam the network with transactions?</h1>
+            <h2>
+                It speeds up confirmations!
+            </h2>
+            <h2>
+                IOTA is a cryptocurrency whose transaction confirmations are based on subsequent transactions that get added to the tangle. So the more transactions that get added to the tangle, the faster previous transactions get confirmed.
+            </h2>
+            <h2>
+                There are other bottlenecks in play that may limit confirmation time, like network quality, bandwidth, and node reliability.
+            </h2>
+        </div>
+    </div>
+
+    <div class="row marketing text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>How does this work?</h1>
+            <h2>
+                This webapp combines two libraries from the IOTA foundation to work: <a href="https://github.com/iotaledger/iota.lib.js">iota.lib.js</a> for interacting with IOTA nodes and <a href="https://github.com/iotaledger/curl.lib.js">curl.lib.js</a> for doing the PoW (Proof of Work) in your web browser.
+            </h2>
+        </div>
+    </div>
+
+    <div class="row marketing text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>About the Author</h1>
+            <h2>
+                This project was originally created by Peter Ryszkiewicz (<a href="https://github.com/pRizz">pRizz@GitHub</a>), software engineer in Chicago, IL.
+            </h2>
+        </div>
+    </div>
+
+    <div class="row marketing text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>About the Project</h1>
+            <h2>
+                This project is hosted on GitHub at <a href="https://github.com/pRizz/iota-transaction-spammer-webapp">https://github.com/pRizz/iota-transaction-spammer-webapp</a> under the MIT license.
+            </h2>
+        </div>
+    </div>
+    <div class="row marketing text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <pre>
+MIT License
+
+Copyright (c) 2017 Peter Ryszkiewicz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+            </pre>
+        </div>
+    </div>
+    <footer class="footer">
+        <p><a href="https://github.com/pRizz/iota-transaction-spammer-webapp">Fork this on GitHub!</a></p>
+        <p><a href="https://github.com/pRizz/iota-transaction-spammer-webapp/archive/master.zip">Download this webapp</a>
+        </p>
+        <p>
+            If you found this useful, consider donating IOTA to:
+        </p>
+        <pre>ARDPDHLZPQZRDBPKTZBIK9OFKCJMGCHFQJTQEXL9KRIVSHNRGHJCEOCMRFXGJMQXDVGNFTTS9GUIOJXXW9RONFYJKW</pre>
+        <p>© Peter Ryszkiewicz 2017</p>
+    </footer>
+
+    <div class="modal fade" id="decryptedTextModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Decrypted Text</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <pre id="decryptedTextModalBody"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+
+</body>
+</html>
