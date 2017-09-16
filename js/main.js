@@ -7,22 +7,17 @@ const hostingSite = 'https://github.com/pRizz/iota-transaction-spammer-webapp'
 const hostingSiteTritified = iotaTransactionSpammer.tritifyURL(hostingSite)
 const significantFigures = 3
 
-function millisecondsToHHMMSSms(milliseconds) {
+function millisecondsToHHMMSS(milliseconds) {
     var sec_num = parseInt(`${milliseconds / 1000}`, 10); // don't forget the second param
     var hours   = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
-    var millisecondsNum = milliseconds % 1000
 
     if (hours   < 10) {hours   = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
-    if (millisecondsNum < 10) {
-        millisecondsNum = `00${millisecondsNum}`
-    } else if (millisecondsNum < 100) {
-        millisecondsNum = `0${millisecondsNum}`
-    }
-    return `${hours}:${minutes}:${seconds}:${millisecondsNum}`
+
+    return `${hours}:${minutes}:${seconds}`
 }
 
 $(function(){
@@ -63,6 +58,23 @@ $(function(){
         //console.log(success)
     })
 
+    iotaTransactionSpammer.eventEmitter.on('working', function(started) {
+        if (started) {
+            // Stop gpu intensive tasks
+            var elems = document.getElementsByClassName('spinnable')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.remove('spinning')
+            var elems = document.getElementsByClassName('progress-bar-animated')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.remove('active')
+        }
+        else {
+            // Restore gpu intensive tasks
+            var elems = document.getElementsByClassName('spinnable')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.add('spinning')
+            var elems = document.getElementsByClassName('progress-bar-animated')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.add('active')
+        }
+    })
+
     iotaTransactionSpammer.startSpamming()
 
     const startMilliseconds = Date.now()
@@ -87,7 +99,7 @@ $(function(){
         $('#confirmationsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getConfirmationCount() / durationInMinutes()).toFixed(significantFigures)
     }
     function updateTimer() {
-        $('#timeSpentSpamming')[0].innerText = millisecondsToHHMMSSms(durationInMilliseconds())
+        $('#timeSpentSpamming')[0].innerText = millisecondsToHHMMSS(durationInMilliseconds())
     }
 
     $('#settingsModal').on('hidden.bs.modal', function() {
@@ -98,9 +110,6 @@ $(function(){
 
     setInterval(function(){
         updateTimer()
-    }, 50)
-
-    setInterval(function(){
         updateTransactionsPerMinute()
         updateConfirmationsPerMinute()
     }, 1000)
