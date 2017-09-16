@@ -1,6 +1,4 @@
-.spinning-logo {
-    width: 40px;
-    height: 40px;
+.spinning {
     -webkit-animation:spin 4s linear infinite;
     -moz-animation:spin 4s linear infinite;
     animation:spin 4s linear infinite;

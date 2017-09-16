@@ -58,6 +58,23 @@ $(function(){
         //console.log(success)
     })
 
+    iotaTransactionSpammer.eventEmitter.on('working', function(started) {
+        if (started) {
+            // Stop gpu intensive tasks
+            var elems = document.getElementsByClassName('spinnable')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.remove('spinning')
+            var elems = document.getElementsByClassName('progress-bar-animated')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.remove('active')
+        }
+        else {
+            // Restore gpu intensive tasks
+            var elems = document.getElementsByClassName('spinnable')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.add('spinning')
+            var elems = document.getElementsByClassName('progress-bar-animated')
+            for (var i = 0; i < elems.length; i++) elems[i].classList.add('active')
+        }
+    })
+
     iotaTransactionSpammer.startSpamming()
 
     const startMilliseconds = Date.now()
