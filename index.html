@@ -14,6 +14,7 @@
 
     <script type="text/javascript" src="deps/jquery.min.js"></script>
     <script type="text/javascript" src="deps/bootstrap.min.js"></script>
+    <script type="text/javascript" src="deps/angular.min.js"></script>
     <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/lib/iota.min.js"></script>
     <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/lib/curl.min.js"></script>
     <script type="text/javascript" src="deps/iota.transactionSpammer.js/src/lib/EventEmitter.min.js"></script>
@@ -26,7 +27,7 @@
 </head>
 <body style="color: #4a4a4a">
 
-<div class="container">
+<div class="container" ng-app="transactionSpammerApp">
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
@@ -35,6 +36,17 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/pRizz/iota-transaction-spammer-webapp">Source</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="$('#settingsModal').modal('show')">Settings</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://prizz.github.io/iota-transaction-spammer-webapp/">IOTA Transaction Spammer</a></li>
+                        <li><a href="https://prizz.github.io/iota-seed-encryptor-decryptor/">IOTA Seed Encryptor/Decryptor</a></li>
+                        <li><a href="https://prizz.github.io/iota-buy-strategy/">IOTA Buy Strategy</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -199,6 +211,35 @@ SOFTWARE.
                     <div class="text-center">
                         <img class="spinning-logo" style="width: 100px; height: 100px" src="iotaLogo.png">
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="settingsModal" role="dialog" ng-controller="settingsController">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Settings</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>
+                        Select a host
+                    </h3>
+                    <select id="hostSelection" ng-model="selectedHost" ng-options="host for host in hostList">
+                    </select> <!-- TODO, make this dropdown use Bootstrap's css -->
+                    <h1> </h1>
+                    <h3>
+                        Custom Host
+                    </h3>
+                    <div>The spammer will lock onto this host if provided.</div>
+                    <input id="customHost" class="form-control" ng-model="customHost" type="text" placeholder="Custom host">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

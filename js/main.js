@@ -90,6 +90,12 @@ $(function(){
         $('#timeSpentSpamming')[0].innerText = millisecondsToHHMMSSms(durationInMilliseconds())
     }
 
+    $('#settingsModal').on('hidden.bs.modal', function() {
+        iotaTransactionSpammer.options({
+            customProvider: $('#customHost')[0].value
+        })
+    })
+
     setInterval(function(){
         updateTimer()
     }, 50)
@@ -101,3 +107,14 @@ $(function(){
 
 })
 
+const app = angular.module("transactionSpammerApp", [])
+app.controller("settingsController", function($scope) {
+    $scope.hostList = iotaTransactionSpammer.validProviders
+    $scope.selectedHost = iotaTransactionSpammer.options().provider
+    $scope.$watch('selectedHost', (newValue) => {
+        iotaTransactionSpammer.options({
+            provider: newValue
+        })
+    })
+    $scope.customHost = ""
+})
