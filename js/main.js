@@ -50,9 +50,13 @@ $(function(){
     })
 
     iotaTransactionSpammer.eventEmitter.on('transactionCompleted', function(success) {
+        const thetangleorgBaseURL = 'https://thetangle.org/transaction/'
         const iotasearchBaseURL = 'https://iotasear.ch/hash/'
         const iotaTipsBaseURL = 'http://www.iota.tips/search/?kind=transaction&hash='
         success.forEach((element) => {
+            const thetangleorgURL = `${thetangleorgBaseURL}${element.hash}`
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${thetangleorgURL}">${thetangleorgURL}</a> </div>`)
+
             const iotaSearchURL = `${iotasearchBaseURL}${element.hash}`
             $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaSearchURL}">${iotaSearchURL}</a> </div>`)
 
