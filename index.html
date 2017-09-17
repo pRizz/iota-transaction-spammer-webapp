@@ -43,6 +43,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="https://prizz.github.io/My-IOTA-Balance/">My IOTA Balance</a></li>
                         <li><a href="https://prizz.github.io/iota-transaction-spammer-webapp/">IOTA Transaction Spammer</a></li>
                         <li><a href="https://prizz.github.io/iota-seed-encryptor-decryptor/">IOTA Seed Encryptor/Decryptor</a></li>
                         <li><a href="https://prizz.github.io/iota-buy-strategy/">IOTA Buy Strategy</a></li>
@@ -97,8 +98,6 @@
                 </pre>
             </div>
         </div>
-
-
     </div>
 
     <div class="row marketing text-center">
@@ -229,6 +228,13 @@ SOFTWARE.
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input id="loadBalanceCheckbox" class="form-check-input" type="checkbox" value="">
+                            Load Balancing. The spammer will change nodes after every transaction.
+                        </label>
+                    </div>
                     <h3>
                         Select a host
                     </h3>
@@ -240,6 +246,7 @@ SOFTWARE.
                     </h3>
                     <div>The spammer will lock onto this host if provided.</div>
                     <input id="customHost" class="form-control" ng-model="customHost" type="text" placeholder="Custom host">
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

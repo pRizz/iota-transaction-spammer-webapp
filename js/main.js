@@ -60,8 +60,9 @@ $(function(){
             $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaTipsURL}">${iotaTipsURL}</a> </div>`)
 
         })
-        //console.log(success)
     })
+
+    $('#loadBalanceCheckbox').prop('checked', iotaTransactionSpammer.options().isLoadBalancing)
 
     iotaTransactionSpammer.startSpamming()
 
@@ -92,7 +93,8 @@ $(function(){
 
     $('#settingsModal').on('hidden.bs.modal', function() {
         iotaTransactionSpammer.options({
-            customProvider: $('#customHost')[0].value
+            customProvider: $('#customHost')[0].value,
+            isLoadBalancing: $('#loadBalanceCheckbox').is(':checked')
         })
     })
 
