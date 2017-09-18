@@ -26,8 +26,6 @@ function millisecondsToHHMMSSms(milliseconds) {
 }
 
 $(function(){
-    $('#nodeWarning').modal('show')
-
     iotaTransactionSpammer.options({
         message: hostingSiteTritified
     })

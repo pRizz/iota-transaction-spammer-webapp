@@ -126,6 +126,19 @@
 
     <div class="row marketing text-center">
         <div class="col-md-8 col-md-offset-2">
+            <h1>Could spamming be bad?</h1>
+            <h2>
+                This tool was made with the intention of strengthening the IOTA network. IOTA is still very early in its development and will need to handle traffic orders of magnitude higher than the people spamming the network today, in order to succeed as a cryptocurrency in the future. This spamming acts as a test for the network that can be utilized to further improve the code, fix bugs and performance issues. In this sense, spamming this early on in this project is a very good thing.
+            </h2>
+            <h2>Here is a quote about the matter <a href="https://blog.iota.org/simple-bug-simple-fix-network-resilience-verified-162161acae77">from David Sønstebø</a>, founder of IOTA:</h2>
+            <blockquote class="blockquote">
+                ...in general IOTA encourage spam as it improves the network’s throughput. Participants ... attempted to spam the network ... which ultimately just gave us a lot of free research data and validation of how the IOTA ledger absorbs such spam attacks organically.
+            </blockquote>
+        </div>
+    </div>
+
+    <div class="row marketing text-center">
+        <div class="col-md-8 col-md-offset-2">
             <h1>About the Author</h1>
             <h2>
                 This project was originally created by Peter Ryszkiewicz (<a href="https://github.com/pRizz">pRizz@GitHub</a>), software engineer in Chicago, IL.
@@ -178,45 +191,6 @@ SOFTWARE.
         <pre>ARDPDHLZPQZRDBPKTZBIK9OFKCJMGCHFQJTQEXL9KRIVSHNRGHJCEOCMRFXGJMQXDVGNFTTS9GUIOJXXW9RONFYJKW</pre>
         <p>© Peter Ryszkiewicz 2017</p>
     </footer>
-
-    <div class="modal fade" id="nodeWarning" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Warning</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="nodeWarningBody">
-                        As of September 11, 2017 (Never Forget)
-                    </div>
-                    <div>
-                        This webapp has been blacklisted by the https node operators due to network/performance issues. Running this webapp over GitHub Pages forces an https connection, so this webapp must connect to https nodes. But since there were only two https nodes in the main list, they were getting hammered by traffic. I have also disabled the https nodes from being spammed at the request of their owners.
-                    </div>
-                    <div>
-                        One solution to this is to download this webapp and run it locally. This will allow you to hit the http-only nodes and spread out the traffic.
-                        <a href="https://github.com/pRizz/iota-transaction-spammer-webapp/releases/download/1.0/iota-transaction-spammer-webapp.zip">https://github.com/pRizz/iota-transaction-spammer-webapp/releases/download/1.0/iota-transaction-spammer-webapp.zip</a>
-                        Just download the zip, unzip, and open the index.html file in your browser.
-                    </div>
-                    <h2>
-                        About the network attacks
-                    </h2>
-                    <div>
-                        This tool was not made with the intention of hurting the IOTA network, but rather strengthening it. IOTA is still very early in its development and will need to handle traffic orders of magnitude higher than the people spamming the network today, in order to succeed as a cryptocurrency in the future. This "attack" acts as a test for the network that can be utilized to further improve the code, fix bugs and performance issues. Don't panic just because of one little bump in the road. IOTA has a long and exciting future ahead!
-                    </div>
-                    <br>
-                    <div class="text-center">
-                        <img class="spinning-logo" style="width: 100px; height: 100px" src="iotaLogo.png">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="settingsModal" role="dialog" ng-controller="settingsController">
         <div class="modal-dialog modal-lg">
