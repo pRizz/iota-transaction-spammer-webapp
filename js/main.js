@@ -25,6 +25,13 @@ function millisecondsToHHMMSSms(milliseconds) {
     return `${hours}:${minutes}:${seconds}:${millisecondsNum}`
 }
 
+function toggleNightMode() {
+    $("body").toggleClass('night-mode')
+    $("pre").toggleClass('night-mode')
+    $(".panel").toggleClass('night-mode')
+    $("img").toggleClass('inverted-image')
+}
+
 $(function(){
     iotaTransactionSpammer.options({
         message: hostingSiteTritified
