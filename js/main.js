@@ -60,13 +60,13 @@ $(function(){
         const iotaTipsBaseURL = 'http://www.iota.tips/search/?kind=transaction&hash='
         success.forEach((element) => {
             const thetangleorgURL = `${thetangleorgBaseURL}${element.hash}`
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${thetangleorgURL}">${thetangleorgURL}</a> </div>`)
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${thetangleorgURL}" target="_blank">${thetangleorgURL}</a></div>`)
 
             const iotaSearchURL = `${iotasearchBaseURL}${element.hash}`
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaSearchURL}">${iotaSearchURL}</a> </div>`)
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaSearchURL}" target="_blank">${iotaSearchURL}</a></div>`)
 
             const iotaTipsURL = `${iotaTipsBaseURL}${element.hash}`
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaTipsURL}">${iotaTipsURL}</a> </div>`)
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaTipsURL}" target="_blank">${iotaTipsURL}</a></div>`)
 
         })
     })
