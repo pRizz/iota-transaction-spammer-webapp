@@ -31,6 +31,7 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
+
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" onclick="toggleNightMode()">Night Mode</a>
                 </li>
@@ -40,15 +41,30 @@
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" onclick="$('#settingsModal').modal('show')">Settings</a>
                 </li>
-                <li class="dropdown">
+
+                <li id="projectsDropdown" class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="https://prizz.github.io/My-IOTA-Balance/">My IOTA Balance</a></li>
-                        <li><a href="https://prizz.github.io/iota-transaction-spammer-webapp/">IOTA Transaction Spammer</a></li>
-                        <li><a href="https://prizz.github.io/iota-seed-encryptor-decryptor/">IOTA Seed Encryptor/Decryptor</a></li>
-                        <li><a href="https://prizz.github.io/iota-buy-strategy/">IOTA Buy Strategy</a></li>
+                        <li><a href="https://prizziota.com/">Home</a></li>
+                        <li class="divider"></li>
+                        <h6 class="dropdown-header">IOTA Tools</h6>
+                        <li><a href="https://prizziota.com/IOTA-Address-Utilities/index.html">IOTA Address Utilities</a></li>
+                        <li><a href="https://prizziota.com/iota-buy-strategy/index.html">IOTA Buy Strategy</a></li>
+                        <li><a href="https://prizziota.com/iota-seed-encryptor-decryptor/index.html">IOTA Seed Encryptor/Decryptor</a></li>
+                        <li><a href="https://prizziota.com/iota-transaction-spammer-webapp/index.html">IOTA Transaction Spammer</a></li>
+                        <li><a href="https://prizziota.com/My-IOTA-Balance/index.html">My IOTA Balance</a></li>
+                        <li class="divider"></li>
+                        <h6 class="dropdown-header">Third Party IOTA Tools</h6>
+                        <li><a href="https://prizziota.com/IOTA-Reattacher/index.html">IOTA Reattacher</a></li>
+                        <li class="divider"></li>
+                        <h6 class="dropdown-header">Monero Tools</h6>
+                        <li><a href="https://prizziota.com/Monero-Donator/index.html">Monero Donator</a></li>
+                        <li class="divider"></li>
+                        <h6 class="dropdown-header">General Tools</h6>
+                        <li><a href="https://prizziota.com/Easy-File-Encryptor-Decryptor/index.html">Easy File Encryptor/Decryptor</a></li>
                     </ul>
                 </li>
+
             </ul>
         </nav>
         <h3 class="text-muted">IOTA Transaction Spammer <img class="spinning-logo" src="iotaLogo.png"></h3>
@@ -181,14 +197,15 @@ SOFTWARE.
             </pre>
         </div>
     </div>
+
     <footer class="footer">
         <p><a href="https://github.com/pRizz/iota-transaction-spammer-webapp">Fork this on GitHub!</a></p>
-        <p><a href="https://github.com/pRizz/iota-transaction-spammer-webapp/archive/master.zip">Download this webapp</a>
-        </p>
-        <p>
-            If you found this useful, consider donating IOTA to:
-        </p>
-        <pre>ARDPDHLZPQZRDBPKTZBIK9OFKCJMGCHFQJTQEXL9KRIVSHNRGHJCEOCMRFXGJMQXDVGNFTTS9GUIOJXXW9RONFYJKW</pre>
+        <p><a href="https://github.com/pRizz/iota-transaction-spammer-webapp/releases">Download this webapp</a></p>
+        <p>If you want to support me or my projects, please consider donating:</p>
+        <div>IOTA: <code>ARDPDHLZPQZRDBPKTZBIK9OFKCJMGCHFQJTQEXL9KRIVSHNRGHJCEOCMRFXGJMQXDVGNFTTS9GUIOJXXW9RONFYJKW</code></div>
+        <p>Monero: <code>49RzM7gNHkpbhBGXQHnfnNbbvS39EG2gzLEjdxtDfNtUakYBqSg6m8zWJ69PRbBHgG61HaxnXwhyPicBbWyzxCNUDeCVgFt</code></p>
+        <p>Don't have any coins? You can donate some of your CPU time at my <a href="https://prizziota.com/Monero-Donator/index.html">Monero Donator</a></p>
+        <p>Thank you!</p>
         <p>© Peter Ryszkiewicz 2017</p>
     </footer>
 
