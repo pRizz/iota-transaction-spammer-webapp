@@ -13,16 +13,20 @@ const tangleExplorers = [
         urlLessHash: 'https://open-iota.prizziota.com/#/search/tx/'
     },
     {
-        name: 'thetangle.org',
-        urlLessHash: 'https://thetangle.org/transaction/'
-    },
-    {
         name: 'iotasear.ch',
         urlLessHash: 'https://iotasear.ch/hash/'
     },
     {
+        name: 'thetangle.org',
+        urlLessHash: 'https://thetangle.org/transaction/'
+    },
+    {
         name: 'www.iota.tips',
         urlLessHash: 'http://www.iota.tips/search/?kind=transaction&hash='
+    },
+    {
+        name: 'iota.codebuffet.co',
+        urlLessHash: 'https://iota.codebuffet.co/#/search/'
     },
 ]
 
@@ -80,7 +84,7 @@ $(function(){
                 return `<a href="${tangleExplorerTransactionURL}" target="_blank">${tangleExplorer.name}</a>`
             }).join(' – ')
 
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: View transaction details at these tangle explorers: ${tangleExplorerLinks}</div>`)
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: View transaction details at: ${tangleExplorerLinks}</div>`)
 
             $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created with hash: ${element.hash}</div>`)
         })
