@@ -7,12 +7,31 @@ const hostingSite = 'https://github.com/pRizz/iota-transaction-spammer-webapp'
 const hostingSiteTritified = iotaTransactionSpammer.tritifyURL(hostingSite)
 const significantFigures = 3
 
+const tangleExplorers = [
+    {
+        name: 'open-iota.prizziota.com',
+        urlLessHash: 'https://open-iota.prizziota.com/#/search/tx/'
+    },
+    {
+        name: 'thetangle.org',
+        urlLessHash: 'https://thetangle.org/transaction/'
+    },
+    {
+        name: 'iotasear.ch',
+        urlLessHash: 'https://iotasear.ch/hash/'
+    },
+    {
+        name: 'www.iota.tips',
+        urlLessHash: 'http://www.iota.tips/search/?kind=transaction&hash='
+    },
+]
+
 function millisecondsToHHMMSSms(milliseconds) {
-    var sec_num = parseInt(`${milliseconds / 1000}`, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
-    var millisecondsNum = milliseconds % 1000
+    const sec_num = parseInt(`${milliseconds / 1000}`, 10); // don't forget the second param
+    let hours   = Math.floor(sec_num / 3600);
+    let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    let seconds = sec_num - (hours * 3600) - (minutes * 60);
+    let millisecondsNum = milliseconds % 1000
 
     if (hours   < 10) {hours   = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
@@ -55,19 +74,15 @@ $(function(){
     })
 
     iotaTransactionSpammer.eventEmitter.on('transactionCompleted', function(success) {
-        const thetangleorgBaseURL = 'https://thetangle.org/transaction/'
-        const iotasearchBaseURL = 'https://iotasear.ch/hash/'
-        const iotaTipsBaseURL = 'http://www.iota.tips/search/?kind=transaction&hash='
-        success.forEach((element) => {
-            const thetangleorgURL = `${thetangleorgBaseURL}${element.hash}`
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${thetangleorgURL}" target="_blank">${thetangleorgURL}</a></div>`)
+        success.forEach(element => {
+            const tangleExplorerLinks = tangleExplorers.map(tangleExplorer => {
+                const tangleExplorerTransactionURL = `${tangleExplorer.urlLessHash}${element.hash}`
+                return `<a href="${tangleExplorerTransactionURL}" target="_blank">${tangleExplorer.name}</a>`
+            }).join(' – ')
 
-            const iotaSearchURL = `${iotasearchBaseURL}${element.hash}`
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaSearchURL}" target="_blank">${iotaSearchURL}</a></div>`)
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: View transaction details at these tangle explorers: ${tangleExplorerLinks}</div>`)
 
-            const iotaTipsURL = `${iotaTipsBaseURL}${element.hash}`
-            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created: <a href="${iotaTipsURL}" target="_blank">${iotaTipsURL}</a></div>`)
-
+            $('#eventLogContent').prepend(`<div>${new Date().toISOString()}: New transaction created with hash: ${element.hash}</div>`)
         })
     })
 
