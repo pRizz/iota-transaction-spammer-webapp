@@ -20,14 +20,6 @@ const tangleExplorers = [
         name: 'thetangle.org',
         urlLessHash: 'https://thetangle.org/transaction/'
     },
-    {
-        name: 'www.iota.tips',
-        urlLessHash: 'http://www.iota.tips/search/?kind=transaction&hash='
-    },
-    {
-        name: 'iota.codebuffet.co',
-        urlLessHash: 'https://iota.codebuffet.co/#/search/'
-    },
 ]
 
 function millisecondsToHHMMSSms(milliseconds) {
