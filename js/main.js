@@ -84,9 +84,26 @@ $(function(){
 
     $('#loadBalanceCheckbox').prop('checked', iotaTransactionSpammer.options().isLoadBalancing)
 
-    iotaTransactionSpammer.startSpamming()
+    let isSpamming = false
+    let startMilliseconds = null
 
-    const startMilliseconds = Date.now()
+    $('#startSpammingButton').click(() => {
+        isSpamming = !isSpamming
+
+        if(isSpamming) {
+            $('#startSpammingButton').text('Stop Spamming')
+            $('#progressBar').addClass('active')
+            iotaTransactionSpammer.startSpamming()
+            startMilliseconds = Date.now()
+            return
+        }
+
+        $('#startSpammingButton').text('Start Spamming')
+        $('#progressBar').removeClass('active')
+        startMilliseconds = null
+        iotaTransactionSpammer.stopSpamming()
+    })
+
 
     function durationInMinutes() {
         return durationInSeconds() / 60
@@ -97,13 +114,16 @@ $(function(){
     }
 
     function durationInMilliseconds() {
+        if(!startMilliseconds) {return 0}
         return Date.now() - startMilliseconds
     }
 
     function updateTransactionsPerMinute() {
+        if(!startMilliseconds) {return 0}
         $('#transactionsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getTransactionCount() / durationInMinutes()).toFixed(significantFigures)
     }
     function updateConfirmationsPerMinute() {
+        if(!startMilliseconds) {return 0}
         const durationInMilliseconds = Date.now() - startMilliseconds
         $('#confirmationsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getConfirmationCount() / durationInMinutes()).toFixed(significantFigures)
     }
