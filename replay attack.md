@@ -87,7 +87,7 @@ As it stands at the time of writing IOTA has a security vulnerability consisting
 
 > **About Me** 
 
-I'm not a real trained programmer as you can probably tell from by github here. I would descibe myself as a sripter only.
+> I'm not a real trained programmer as you can probably tell from by github here. I would descibe myself as a sripter only.
 
 > **Decision to Publish**
 
