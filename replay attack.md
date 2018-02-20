@@ -1,1 +1,115 @@
-test
+## Replay Attacks in IOTA
+
+**Introduction**
+
+This vulnerability report is written after researching and testing the IOTA network through the javascript libraries. Specific credit goes to Peter Ryszkiewicz’s open source network spamming web app, that I modified for personal use during my tests. My interest was specifically about how the network would handle inconsistent subtangles if it was presented with dozens of conflicting options. However during this research I found example of behaviour which seemed dangerous to the security of the network. This report presents those findings.
+
+**Decision to Publish**
+
+The decision to publish this report publicly was not taken lightly, however I decided to based on the following reasons.
+
+* The IOTA foundations response to the MIT-DCI report, specifically Come-from-Beyond’s attitude, that he himself will categorize as trolling. I would rather just post this here rather than dealing with that.
+
+* The naive replay attacks is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as they have done in the past.
+
+* IOTA transaction approval is currently completely centralized by the coordinator, so no information I provide here can be used without explicit consent of the coordinator who could decide to not allow replays (simplest solution).
+
+* The good of the holder of IOTA should be balanced with potential new investors who should know all the facts.
+
+* The attack works based on using the official API call actually labelled “replayBundle”. Pointing out that this can be used maliciously should not be a surprise to anyone who has spend anytime using the API.
+
+* I have evidence that this replay vulnerability has happened already in the wild, so concealing the vulnerability is futile and only benefits those who may already be using it.
+
+### The Reattach Button AKA “replayBundle”
+
+IOTA utilizes one time signatures which combined with low confirmation rates of transactions necessitates the “replayBundle” feature. Reattaching is often required to get a transaction through and bundles can only be safely signed a single time. Therefore the user is allowed to simply reattach any bundle of transactions they want without any proof of ownership. This should not be a problem because every bundle has a unique hash. The expected behaviour should be that only one use of the same bundle hash should be allowed inside a consistent transaction history (subtangle). 
+
+**The Vulnerability**
+
+However it is not the case that replays of a previously confirmed bundle will not get confirmed again. The coordinator will repeatedly approve the same bundle hash over and over. This means that while you may have signed a transaction to send 500 Miota it can be attached to the network 10 times draining the account of 5000 Miota.
+
+See Figure 1 for examples of where this has been demonstrated. Note, I have only given examples of with addresses containing less than 10 cents, however I am aware of an example where between $1000-$10000 is at risk of being completely robbed, and already has been stolen from once (likely on accident). 
+
+Possible Replays
+Total Replays
+
+Bundle Hash
+4
+4
+GUVBEXVOHJXNS9JJII9SYJGIHKOOOYLFKUI9KVOELJ9PBQLWGPHWONCGNMTOLCCKUUYHJGNKFBYW9HJXC
+147
+2
+AZQLCIRRYSHPBKJLAGQAQ9FCRSUDFIVGJGPRQN9JFYGKDDHDDKABNYBQTUIP9F9XTETGZKYGBKSEISAKD
+12
+
+
+4
+TTETGYVFACAFIJUASFPLZTJPHVE9WNFBVL9VDPFXHLABHFPAALAPNAJJKACEFBTLQZC9J9NJNHDRGXDFZ
+329
+3
+TYKONWZKEXKGDOYANHRKPSA9CCLAAUNPZIWCXQATXBEEGYJXZKD9DSAUGOIXHXVWLNZTHGFEWGQLBIGNB
+36
+2
+JTXCGYGETVBJX9IWDPLENQAD9JJHHATSNYEDNQWVIKUKYDZVBRKJKZYRAWQIQYBSJZLTKLW9ZSDGPABA9
+2
+2
+CCIEOODZIDJJRNVKOXCYCTCKNITMLYYU9K9PSDVNLTCPYBYCCJ9DXBFWCECACLBPNUJXKWY99TIFDUEPZ
+5
+2
+DWALFPLDNQFEPLKQWFINIXYIAOUGEDZCSXGUZJQENGRBZHIVFIUOLLBWSTHLTBKNXYCRSQKURCEGKOLC9
+2
+2
+UFIKRBXHZVI9AWUD9UXAVHXEAGVLHK9FJLPHNSKEAJFWAFONOJUQSYQPJATOAEELFXZAHSPVG9J9NKDJW
+
+Figure 1 - Examples of Reattached Bundles
+
+I also worked to confirm that the each “confirmed” set of the bundle really is counted towards the address funds. I showed this by replaying a bundles with 1 iota to an address 5 times. From this address I then sent a bundle with 5 iotas to another address. This demonstrates that the balance shown on the tangle explorers is the correct balance as interpreted by the coordinator.
+
+Fortunately, since IOTA discourages the reuse of addresses it is uncommon for there to be any funds left on the address. The replay attack is only applicable where addresses has been reused. However it should not be confused with the know signature reuse issue, which is only a theoretical concern for a single reuse. The replay attack applies with only one reuse as is easy to implement.
+
+### Basic Variants of Attack
+
+Because address reuse is discouraged this exploit has limited scope. Unfortunately, there are still plentiful cases where used address still hold funds including the 4th richest address ($221,995,594.67). Also there are more sophisticated attacks that would only use the replay exploit as a mechanism in a larger attack. These attacks are described below.
+
+**Naive Attack**
+
+Find a bundle that has already been confirmed once. If it has sufficient funds to be replayed, simply attach it to the network again using the official API command “replayBundle”.  Or more simply the “reattach” button however that includes a bit of logic to prevent accidental replay after a confirmation. There are 3 reasons why an attacker might want to do this.
+They control the account that the replay will send funds to by controlling the seed.
+They control the address that the replay will send funds to by forging signatures. Requires that the address has been reused 2-3 times.
+They simply like chaos. A not uncommon trait in humans.
+
+**Chain Replays**
+
+If the naive attack works it will fund the downstream addresses. If those addresses have been emptied previously, the bundle that emptied them can be replayed again. This is important because the attacker may only need access to the 3rd, 4th, 5th etc. address in a chain. 
+
+**Top Up Attack**
+
+If the address has insufficient funds to allow a replay, the attacker can send a top up amount to the address to allow the release of the funds. This extends the number of addresses that are vulnerable to the naive attack.
+
+**Virtual - Top Up Attack**
+
+IOTA leger verification is based on overall consistency of the tangle therefore it is possible to top up the targets account with the same funds that will be removed from their account. For example, I have sent 1000Ti ($2,000,000,000 USD) from an address to the same address. It is confirmed here as shown in image below this also works for a bunch of transactions outside a bundle. This reduces the upfront cost of the Top up Attack to zero, since the top up value is completely virtual.
+
+Figure 2 - Consistent Subtangle
+
+### Social Engineering Variations
+Using some creativity the attacker can manipulate situations to help allow the attacks described above. Here are some examples.
+
+**“Baiting” Signature Reuse**
+In this case the attacker finds an address they would like to control as the exit address in a Chain Replay. They send $1 transfers to this address tempting the owner to withdraw them. The owner might see this as free money and withdraw it to a safe address. Some wallets may even do this automatically. This would leave the attacker with enough information forge transactions from the address.
+
+**“Missed a Zero”**
+
+The attacker first sends 1/10 the amount they promise to their target. At the same time they send the full amount however for this they place it on the tangle in such a way it won’t possibly confirm (ex. approve inconsistent tips). They then request the person to send back the 1/10th making the claim they missed a zero. Once that is received back they send the full amount. Everything looks good, except the attacker now has a built in channel to take back the full amount by simply replaying the 1/10th transaction 10 times. They can do this immediately after receiving the money, goods, or service they purchased.
+
+**Sharing Know “Useless” Seeds.**
+
+Once a seed is exposed it is presumably useless, however if it controls a used set of addresses it suddenly has value again to an attacker for a chain replay. The attacker would try to exploit the feeling that there is no danger in giving away a seed once all funds are removed from that account. Trading old seeds for “air drops” or “faucets” as a proof of identity is one way this could be presented by the attacker.
+
+**Recommendation**
+
+All that needs to be done to fix this is keep track of the unique hash of each signed transaction bundle. With this information make a rule that the same bundle hash cannot be used twice. 
+
+**Conclusion**
+
+As it stands at the time of writing IOTA has a security vulnerability consisting of replaying old transactions. It can be easily fixed as suggested in my recommendation. However, the fact that it is such a simple fix to such an obvious problem should give everyone involved with IOTA pause and hopefully a bit more humility. 
