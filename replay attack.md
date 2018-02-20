@@ -46,19 +46,19 @@ See below for examples of where this has been demonstrated. Note, I have only gi
 
 * [UFIKRBXHZVI9AWUD9UXAVHXEAGVLHK9FJLPHNSKEAJFWAFONOJUQSYQPJATOAEELFXZAHSPVG9J9NKDJW](https://thetangle.org/bundle/UFIKRBXHZVI9AWUD9UXAVHXEAGVLHK9FJLPHNSKEAJFWAFONOJUQSYQPJATOAEELFXZAHSPVG9J9NKDJW)
 
-I also worked to confirm that the each “confirmed” set of the bundle really is counted towards the address funds. I showed this by replaying a bundles with 1 iota to an address 5 times. From this address I then sent a bundle with 5 iotas to another address. This demonstrates that the balance shown on the tangle explorers is the correct balance as interpreted by the coordinator.
+I also worked to confirm that the each “confirmed” set of the bundle really is counted towards the address funds. I showed this by replaying a [bundle with 1 iota](https://thetangle.org/bundle/SKIYVNTSFSINBADH99EWL9JFOEGDZLWHNDSSW9RUGKLERCEBWSFWLDKOJZDAZDFLEPUGVWTIFZRSBGDO9) to an address 5 times. From this address I then sent a [bundle with 5 iota](https://thetangle.org/bundle/WFYLKATAWXWVQXEDAKPSHZCIWXQERA9JTYPACDVCGHZOSAGUACLIXOCCXAVHGWGI9VFSXZUTBNGLQIIVX) to another address. This demonstrates that the balance shown on the tangle explorers is the correct balance as interpreted by the coordinator.
 
 Fortunately, since IOTA discourages the reuse of addresses it is uncommon for there to be any funds left on the address. The replay attack is only applicable where addresses has been reused. However it should not be confused with the know signature reuse issue, which is only a theoretical concern for a single reuse. The replay attack applies with only one reuse as is easy to implement.
 
 ### Basic Variants of Attack
 
-Because address reuse is discouraged this exploit has limited scope. Unfortunately, there are still plentiful cases where used address still hold funds including the 4th richest address ($221,995,594.67). Also there are more sophisticated attacks that would only use the replay exploit as a mechanism in a larger attack. These attacks are described below.
+Because address reuse is discouraged this exploit has limited scope. Unfortunately, there are still plentiful cases where used address still hold funds including the [4th richest address ($221,995,594.67)](https://thetangle.org/address/GCNOSWGBDDAZRLAYIV999YQUDLVJIQG9QTSEZDJVH9UEENIRKAZGEYKVFGUAWNJ9YMZCLUDPSLDLD9EOW). Also there are more sophisticated attacks that would only use the replay exploit as a mechanism in a larger attack. These attacks are described below.
 
 **Naive Attack**
 
 Find a bundle that has already been confirmed once. If it has sufficient funds to be replayed, simply attach it to the network again using the official API command “replayBundle”.  Or more simply the “reattach” button however that includes a bit of logic to prevent accidental replay after a confirmation. There are 3 reasons why an attacker might want to do this.
 * They control the account that the replay will send funds to by controlling the seed.
-* They control the address that the replay will send funds to by forging signatures. Requires that the address has been reused 2-3 times.
+* They control the address that the replay will send funds to by forging signatures. Requires that the address has been reused [2-3 times.](https://public.tangle.works/winternitz.pdf)
 * They simply like chaos. A not uncommon trait in humans.
 
 **Chain Replays**
@@ -71,7 +71,7 @@ If the address has insufficient funds to allow a replay, the attacker can send a
 
 **Virtual - Top Up Attack**
 
-IOTA leger verification is based on overall consistency of the tangle therefore it is possible to top up the targets account with the same funds that will be removed from their account. For example, I have sent 1000Ti ($2,000,000,000 USD) from an address to the same address. It is confirmed here this also works for a bunch of transactions outside a bundle. This reduces the upfront cost of the Top up Attack to zero, since the top up value is completely virtual.
+IOTA leger verification is based on overall consistency of the tangle therefore it is possible to top up the targets account with the same funds that will be removed from their account. For example, I have sent [1000Ti ($2,000,000,000 USD)](https://thetangle.org/transaction/MQOJLVYMDKKJLMPMTSQWAHTTRMMIT9TFOAWAZJDOUA9D9OATPNTXLPWAOVFCPBJQHELHTREQDQXPZ9999) from an address to the same address. It is [confirmed here](https://forum.iota.org/t/iota-double-spending-masterclass/1311) this also works for a bunch of transactions outside a bundle. This reduces the upfront cost of the Top up Attack to zero, since the top up value is completely virtual.
 
 ### Social Engineering Variations
 Using some creativity the attacker can manipulate situations to help allow the attacks described above. Here are some examples.
@@ -87,10 +87,10 @@ The attacker first sends 1/10 the amount they promise to their target. At the sa
 
 Once a seed is exposed it is presumably useless, however if it controls a used set of addresses it suddenly has value again to an attacker for a chain replay. The attacker would try to exploit the feeling that there is no danger in giving away a seed once all funds are removed from that account. Trading old seeds for “air drops” or “faucets” as a proof of identity is one way this could be presented by the attacker.
 
-**Recommendation**
+### Recommendation
 
 All that needs to be done to fix this is keep track of the unique hash of each signed transaction bundle. With this information make a rule that the same bundle hash cannot be used twice. 
 
-**Conclusion**
+### Conclusion
 
 As it stands at the time of writing IOTA has a security vulnerability consisting of replaying old transactions. It can be easily fixed as suggested in my recommendation. However, the fact that it is such a simple fix to such an obvious problem should give everyone involved with IOTA pause and hopefully a bit more humility. 
