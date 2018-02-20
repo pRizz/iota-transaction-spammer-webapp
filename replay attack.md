@@ -81,7 +81,7 @@ IOTA leger verification is based on overall consistency of the tangle therefore 
 Using some creativity the attacker can manipulate situations to help allow the attacks described above. Here are some examples.
 
 **“Baiting” Signature Reuse**
-In this case the attacker finds an address they would like to control as the exit address in a Chain Replay. They send $1 transfers to this address tempting the owner to withdraw them. The owner might see this as free money and withdraw it to a safe address. Some wallets may even do this automatically. This would leave the attacker with enough information forge transactions from the address.
+In this case the attacker finds an address they would like to control as the exit address in a Chain Replay. They send $1 transfers to this address tempting the owner to withdraw them. The owner might see this as free money and withdraw it to a safe address. Some wallets may even do this automatically. This would leave the attacker with enough information to forge transactions from the address.
 
 **“Missed a Zero”**
 
