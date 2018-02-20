@@ -2,13 +2,13 @@
 
 **Introduction**
 
-This vulnerability report is written after researching and testing the IOTA network through the javascript libraries. Specific credit goes to Peter Ryszkiewicz’s open source network spamming web app, that I modified for personal use during my tests. My interest was specifically about how the network would handle inconsistent subtangles if it was presented with dozens of conflicting options. However during this research I found example of behaviour which seemed dangerous to the security of the network. This report presents those findings.
+This vulnerability report is written after researching and testing the IOTA network through the javascript libraries. Specific credit goes to Peter Ryszkiewicz’s open source [network spamming web app](https://github.com/pRizz/iota-transaction-spammer-webapp), that I modified for personal use during my tests. My interest was specifically about how the network would handle inconsistent subtangles if it was presented with dozens of conflicting options. However during this research I found example of behaviour which seemed dangerous to the security of the network. This report presents those findings.
 
 **Decision to Publish**
 
 The decision to publish this report publicly was not taken lightly, however I decided to based on the following reasons.
 
-* The IOTA foundations response to the MIT-DCI report, specifically Come-from-Beyond’s attitude, that he himself will categorize as trolling. I would rather just post this here rather than dealing with that.
+* The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude, that he himself will categorize as trolling. I would rather just post this here rather than dealing with that.
 
 * The naive replay attacks is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as they have done in the past.
 
@@ -57,13 +57,13 @@ Because address reuse is discouraged this exploit has limited scope. Unfortunate
 **Naive Attack**
 
 Find a bundle that has already been confirmed once. If it has sufficient funds to be replayed, simply attach it to the network again using the official API command “replayBundle”.  Or more simply the “reattach” button however that includes a bit of logic to prevent accidental replay after a confirmation. There are 3 reasons why an attacker might want to do this.
-They control the account that the replay will send funds to by controlling the seed.
-They control the address that the replay will send funds to by forging signatures. Requires that the address has been reused 2-3 times.
-They simply like chaos. A not uncommon trait in humans.
+* They control the account that the replay will send funds to by controlling the seed.
+* They control the address that the replay will send funds to by forging signatures. Requires that the address has been reused 2-3 times.
+* They simply like chaos. A not uncommon trait in humans.
 
 **Chain Replays**
 
-If the naive attack works it will fund the downstream addresses. If those addresses have been emptied previously, the bundle that emptied them can be replayed again. This is important because the attacker may only need access to the 3rd, 4th, 5th etc. address in a chain. 
+If the naive attack works it will fund the downstream addresses. If those addresses have been emptied previously, the bundle that emptied them can be replayed again. This is important because the attacker may only need access to the 3rd, 4th, 5th etc. address in a chain to syphon funds. 
 
 **Top Up Attack**
 
@@ -71,9 +71,7 @@ If the address has insufficient funds to allow a replay, the attacker can send a
 
 **Virtual - Top Up Attack**
 
-IOTA leger verification is based on overall consistency of the tangle therefore it is possible to top up the targets account with the same funds that will be removed from their account. For example, I have sent 1000Ti ($2,000,000,000 USD) from an address to the same address. It is confirmed here as shown in image below this also works for a bunch of transactions outside a bundle. This reduces the upfront cost of the Top up Attack to zero, since the top up value is completely virtual.
-
-Figure 2 - Consistent Subtangle
+IOTA leger verification is based on overall consistency of the tangle therefore it is possible to top up the targets account with the same funds that will be removed from their account. For example, I have sent 1000Ti ($2,000,000,000 USD) from an address to the same address. It is confirmed here this also works for a bunch of transactions outside a bundle. This reduces the upfront cost of the Top up Attack to zero, since the top up value is completely virtual.
 
 ### Social Engineering Variations
 Using some creativity the attacker can manipulate situations to help allow the attacks described above. Here are some examples.
