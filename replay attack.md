@@ -48,6 +48,8 @@ See below for examples of where this has been demonstrated. Note, I have only gi
 
 * [UFIKRBXHZVI9AWUD9UXAVHXEAGVLHK9FJLPHNSKEAJFWAFONOJUQSYQPJATOAEELFXZAHSPVG9J9NKDJW](https://thetangle.org/bundle/UFIKRBXHZVI9AWUD9UXAVHXEAGVLHK9FJLPHNSKEAJFWAFONOJUQSYQPJATOAEELFXZAHSPVG9J9NKDJW)
 
+*I need to emphasize that these transactions were only signed for once by the coins owner. The replay of them was done with no additional signatures.*
+
 I also worked to confirm that the each “confirmed” set of the bundle really is counted towards the address funds. I showed this by replaying a [bundle with 1 iota](https://thetangle.org/bundle/SKIYVNTSFSINBADH99EWL9JFOEGDZLWHNDSSW9RUGKLERCEBWSFWLDKOJZDAZDFLEPUGVWTIFZRSBGDO9) to an address 5 times. From this address I then sent a [bundle with 5 iota](https://thetangle.org/bundle/WFYLKATAWXWVQXEDAKPSHZCIWXQERA9JTYPACDVCGHZOSAGUACLIXOCCXAVHGWGI9VFSXZUTBNGLQIIVX) to another address. This demonstrates that the balance shown on the tangle explorers is the correct balance as interpreted by the coordinator.
 
 Fortunately, since IOTA discourages the reuse of addresses it is uncommon for there to be any funds left on the address. The replay attack is only applicable where addresses has been reused. However it should not be confused with the signature reuse issue, which is only a theoretical concern for a single reuse. The replay attack applies with only one reuse and is easy to implement.
