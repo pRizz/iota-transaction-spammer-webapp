@@ -12,7 +12,7 @@ The decision to publish this report publicly was not taken lightly, however I de
 
 * The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude (that he himself will categorize as trolling). I would rather just post this here rather than dealing with that.
 
-* The naive replay attacks is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as they have done in the past.
+* The naive replay attack is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as I undertand they have done in the past.
 
 * IOTA transaction approval is currently completely centralized by the coordinator, so no information I provide here can be used without explicit consent of the coordinator who could decide to not allow replays (simplest solution).
 
