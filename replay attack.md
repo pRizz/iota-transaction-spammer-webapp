@@ -97,4 +97,6 @@ All that needs to be done to fix this is keep track of the unique hash of each s
 
 As it stands at the time of writing IOTA has a security vulnerability consisting of replaying old transactions. It can be easily fixed as suggested in my recommendation. However, the fact that it is such a simple fix to such an obvious problem should give everyone involved with IOTA pause and hopefully a bit more humility. 
 
-**About Me** I'm not a real trained programmer as you can probably tell from by github here. I would descibe myself as a sripter only.
+
+
+> **About Me** I'm not a real trained programmer as you can probably tell from by github here. I would descibe myself as a sripter only.
