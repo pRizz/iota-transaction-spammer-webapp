@@ -18,7 +18,7 @@ The decision to publish this report publicly was not taken lightly, however I de
 
 * The good of the holder of IOTA should be balanced with potential new investors who should know all the facts.
 
-* The attack works based on using the official API call actually labelled “replayBundle”. Pointing out that this can be used maliciously should not be a surprise to anyone who has spend anytime using the API.
+* The attack works based on using the official API call aptly labelled “replayBundle”. Pointing out that this can be used maliciously should not be a surprise to anyone who has spend anytime using the API.
 
 * I have evidence that this replay vulnerability has happened already in the wild, so concealing the vulnerability is futile and only benefits those who may already be using it.
 
