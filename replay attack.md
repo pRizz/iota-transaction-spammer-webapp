@@ -10,7 +10,7 @@ This vulnerability report is written after researching and testing the IOTA netw
 
 The decision to publish this report publicly was not taken lightly, however I decided to based on the following reasons.
 
-* The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude (that he himself will categorize as trolling). I would rather just post this here rather than dealing with that.
+* The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude (that he himself will occasionally categorize as trolling). I would rather just post this here rather than dealing with that.
 
 * The naive replay attack is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as I undertand they have done in the past.
 
