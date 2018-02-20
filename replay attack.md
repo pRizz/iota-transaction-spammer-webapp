@@ -93,7 +93,7 @@ Once a seed is exposed it is presumably useless, however if it controls a used s
 
 ### Recommendation
 
-All that needs to be done to fix this is keep track of the unique hash of each signed transaction bundle. With this information make a rule that the same bundle hash cannot be used twice. 
+All that needs to be done to fix this is keep track of the unique hash of each signed transaction bundle. With this information make a rule that the same bundle hash cannot be used twice within a subtangle. 
 
 ### Conclusion
 
