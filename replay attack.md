@@ -6,22 +6,6 @@ by Joseph Rebstock
 
 This vulnerability report is written after researching and testing the IOTA network through the javascript libraries over a three day period. Specific credit goes to Peter Ryszkiewicz’s open source [network spamming web app](https://github.com/pRizz/iota-transaction-spammer-webapp), that I modified for personal use during my tests. My interest was specifically about how the network would handle inconsistent subtangles if it was presented with dozens of conflicting options. However during this research I found example of behaviour which seemed dangerous to the security of the network. This report presents those findings.
 
-**Decision to Publish**
-
-The decision to publish this report publicly without first fully reaching out to the IOTA foundation was not taken lightly, however I decided to based on the following reasons.
-
-* The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude (that he himself will occasionally categorize as trolling). As recently as saying they have ["lawyers working on that already"](https://twitter.com/c___f___b/status/965667086348509185) calling their report fraud. I'm unsure if that is more trolling, but I would rather just post my thing here than dealing with any of that.
-
-* The naive replay attack is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as I undertand they have done in the past.
-
-* IOTA transaction approval is currently completely centralized by the coordinator, so no information I provide here can be used without explicit consent of the coordinator who could decide to not allow replays (simplest solution).
-
-* The good of the holder of IOTA should be balanced with potential new investors who should know all the facts.
-
-* The attack works based on using the official API call aptly labelled “replayBundle”. Pointing out that this can be used maliciously should not be a surprise to anyone who has spend anytime using the API.
-
-* I have evidence that this replay vulnerability has happened already in the wild, so concealing the vulnerability is futile and only benefits those who may already be using it.
-
 ### The Reattach Button AKA “replayBundle”
 
 IOTA utilizes one time signatures which combined with low confirmation rates of transactions necessitates the “replayBundle” feature. Reattaching is often required to get a transaction through and bundles can only be safely signed a single time. Therefore the user is allowed to simply reattach any bundle of transactions they want without any proof of ownership. This should not be a problem because every bundle has a unique hash. The expected behaviour should be that only one use of the same bundle hash should be allowed inside a consistent transaction history (subtangle). 
@@ -101,4 +85,22 @@ As it stands at the time of writing IOTA has a security vulnerability consisting
 
 
 
-> **About Me** I'm not a real trained programmer as you can probably tell from by github here. I would descibe myself as a sripter only.
+> **About Me** 
+
+I'm not a real trained programmer as you can probably tell from by github here. I would descibe myself as a sripter only.
+
+> **Decision to Publish**
+
+> The decision to publish this report publicly without first fully reaching out to the IOTA foundation was not taken lightly, however I decided to based on the following reasons.
+
+> * The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude (that he himself will occasionally categorize as trolling). As recently as saying they have ["lawyers working on that already"](https://twitter.com/c___f___b/status/965667086348509185) calling their report fraud. I'm unsure if that is more trolling, but I would rather just post my thing here than dealing with any of that.
+
+> * The naive replay attack is limited in scope to a small number of addresses, with only a small number holding an amount of IOTA that would be cared if it were lost. Also, IOTA foundation can unilaterally freeze and put those funds into the reclaim process if they want as I undertand they have done in the past.
+
+> * IOTA transaction approval is currently completely centralized by the coordinator, so no information I provide here can be used without explicit consent of the coordinator who could decide to not allow replays (simplest solution).
+
+> * The good of the holder of IOTA should be balanced with potential new investors who should know all the facts.
+
+> * The attack works based on using the official API call aptly labelled “replayBundle”. Pointing out that this can be used maliciously should not be a surprise to anyone who has spend anytime using the API.
+
+> * I have evidence that this replay vulnerability has happened already in the wild, so concealing the vulnerability is futile and only benefits those who may already be using it.
