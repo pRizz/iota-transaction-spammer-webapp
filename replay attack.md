@@ -1,5 +1,7 @@
 ## Replay Attacks in IOTA
 
+by Joseph Rebstock
+
 **Introduction**
 
 This vulnerability report is written after researching and testing the IOTA network through the javascript libraries. Specific credit goes to Peter Ryszkiewicz’s open source [network spamming web app](https://github.com/pRizz/iota-transaction-spammer-webapp), that I modified for personal use during my tests. My interest was specifically about how the network would handle inconsistent subtangles if it was presented with dozens of conflicting options. However during this research I found example of behaviour which seemed dangerous to the security of the network. This report presents those findings.
