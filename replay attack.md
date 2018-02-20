@@ -8,7 +8,7 @@ This vulnerability report is written after researching and testing the IOTA netw
 
 **Decision to Publish**
 
-The decision to publish this report publicly was not taken lightly, however I decided to based on the following reasons.
+The decision to publish this report publicly without first fully reaching out to the IOTA foundation was not taken lightly, however I decided to based on the following reasons.
 
 * The IOTA foundations response to the [MIT-DCI report](https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md), specifically Come-from-Beyond’s attitude (that he himself will occasionally categorize as trolling). I would rather just post this here rather than dealing with that.
 
