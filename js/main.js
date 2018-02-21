@@ -61,12 +61,12 @@ $(function(){
         $('#transactionCount')[0].innerText = transactionCount
     })
 
-    iotaTransactionSpammer.eventEmitter.on('confirmationCountChanged', function(confirmationCount) {
-        $('#confirmationCount')[0].innerText = confirmationCount
+    iotaTransactionSpammer.eventEmitter.on('approvalCountChanged', function(approvalCount) {
+        $('#approvalCount')[0].innerText = approvalCount
     })
 
-    iotaTransactionSpammer.eventEmitter.on('averageConfirmationDurationChanged', function(averageConfirmationDuration) {
-        $('#averageConfirmationDuration')[0].innerText = (averageConfirmationDuration / 1000).toFixed(significantFigures)
+    iotaTransactionSpammer.eventEmitter.on('averageApprovalDurationChanged', function(averageApprovalDuration) {
+        $('#averageApprovalDuration')[0].innerText = (averageApprovalDuration / 1000).toFixed(significantFigures)
     })
 
     iotaTransactionSpammer.eventEmitter.on('transactionCompleted', function(success) {
@@ -122,10 +122,10 @@ $(function(){
         if(!startMilliseconds) {return 0}
         $('#transactionsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getTransactionCount() / durationInMinutes()).toFixed(significantFigures)
     }
-    function updateConfirmationsPerMinute() {
+    function updateApprovalsPerMinute() {
         if(!startMilliseconds) {return 0}
         const durationInMilliseconds = Date.now() - startMilliseconds
-        $('#confirmationsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getConfirmationCount() / durationInMinutes()).toFixed(significantFigures)
+        $('#approvalsPerMinuteCount')[0].innerText = (iotaTransactionSpammer.getApprovalCount() / durationInMinutes()).toFixed(significantFigures)
     }
     function updateTimer() {
         $('#timeSpentSpamming')[0].innerText = millisecondsToHHMMSSms(durationInMilliseconds())
@@ -144,7 +144,7 @@ $(function(){
 
     setInterval(function(){
         updateTransactionsPerMinute()
-        updateConfirmationsPerMinute()
+        updateApprovalsPerMinute()
     }, 1000)
 
 })
